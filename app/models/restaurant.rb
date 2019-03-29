@@ -1,5 +1,5 @@
 class Restaurant < ApplicationRecord
-validates :name, :address, presence: true
+validates :name, :address, presence: true, uniqueness: true
 
 before_save :default_values
 

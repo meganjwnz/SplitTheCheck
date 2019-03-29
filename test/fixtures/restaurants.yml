@@ -11,3 +11,9 @@ two:
   address: MyString
   upvote: 1
   downvote: 1
+
+ruby:
+  name: Fancy Restaurant
+  address: 123 Expensive Address
+  upvote: 0
+  downvote: 0

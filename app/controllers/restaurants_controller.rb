@@ -5,7 +5,6 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
-    
     if params[:search_name] && params[:search_address]
       @search_name = params[:search_name]
       @search_address = params[:search_address]

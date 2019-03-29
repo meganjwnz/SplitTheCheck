@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class RestaurantsControllerTest < ActionDispatch::IntegrationTest
+  fixtures :restaurants
+
   setup do
     @restaurant = restaurants(:one)
   end
@@ -15,14 +17,6 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create restaurant" do
-    assert_difference('Restaurant.count') do
-      post restaurants_url, params: { restaurant: { address: @restaurant.address, downvote: @restaurant.downvote, name: @restaurant.name, upvote: @restaurant.upvote } }
-    end
-
-    assert_redirected_to restaurant_url(Restaurant.last)
-  end
-
   test "should show restaurant" do
     get restaurant_url(@restaurant)
     assert_response :success
@@ -33,16 +27,4 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update restaurant" do
-    patch restaurant_url(@restaurant), params: { restaurant: { address: @restaurant.address, downvote: @restaurant.downvote, name: @restaurant.name, upvote: @restaurant.upvote } }
-    assert_redirected_to restaurant_url(@restaurant)
-  end
-
-  test "should destroy restaurant" do
-    assert_difference('Restaurant.count', -1) do
-      delete restaurant_url(@restaurant)
-    end
-
-    assert_redirected_to restaurants_url
-  end
 end
