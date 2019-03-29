@@ -21,6 +21,32 @@ class RestaurantsController < ApplicationController
   def edit
   end
 
+  def upvote
+    @restaurant = Restaurant.where(id: params[:id])
+    @upvote = params[:upvote].to_i
+      if(@upvote == nil)
+        @upvote = 0
+      end
+
+      if params[:decision] == "true"
+        @restaurant.update(upvote: @upvote + 1)
+        redirect_to restaurants_url
+      end
+  end
+
+  def downvote
+    @restaurant = Restaurant.where(id: params[:id])
+    @downvote = params[:downvote].to_i
+      if(@downvote == nil)
+        @downvote = 0
+      end
+
+      if params[:decision] == "true"
+        @restaurant.update(downvote: @downvote + 1)
+        redirect_to restaurants_url
+      end
+  end
+
   # POST /restaurants
   # POST /restaurants.json
   def create
@@ -51,6 +77,7 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  
   # DELETE /restaurants/1
   # DELETE /restaurants/1.json
   #def destroy
@@ -69,6 +96,6 @@ class RestaurantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def restaurant_params
-      params.require(:restaurant).permit(:name, :address, :upvote, :downvote)
+      params.permit(:name, :address, :upvote, :downvote)
     end
 end
