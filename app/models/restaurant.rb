@@ -1,6 +1,14 @@
 class Restaurant < ApplicationRecord
 validates :name, :address, presence: true
 
+before_save :default_values
+
+  #Adds default value to upvote and downvote
+  def default_values
+    self.upvote = 0 if self.upvote.nil?
+    self.downvote= 0 if self.downvote.nil?
+  end
+
   # Increments upvotes
   # param: restaurant = current restaurant
   # param: upvote = current number of upvotes
