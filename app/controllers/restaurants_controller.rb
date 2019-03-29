@@ -5,6 +5,12 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
+    
+    if params[:search_name] && params[:search_address]
+      @search_name = params[:search_name]
+      @search_address = params[:search_address]
+      @restaurants = @restaurants.search_by(@search_name, @search_address)
+    end
   end
 
   # GET /restaurants/1
@@ -86,6 +92,6 @@ class RestaurantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def restaurant_params
-      params.permit(:name, :address, :upvote, :downvote)
+      params.require(@restaurant).permit(:name, :address, :upvote, :downvote)
     end
 end

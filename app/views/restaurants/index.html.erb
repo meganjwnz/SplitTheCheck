@@ -2,11 +2,20 @@
 
 <h1>Restaurants</h1>
 
+<%= form_for "", url: restaurants_path, role: "search", method: :get do %>
+<%= text_field_tag :search_name, @search_term_name,placeholder: "Restaurant ... " %> <br>
+<%= text_field_tag :search_address, @search_term_address,placeholder: "Address ... " %><br>
+<%= submit_tag "Search" %>
+<% end %> <br>
+
+
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Address</th>
+      <th>Upvotes</th>
+      <th>Downvotes</th>
       <th colspan="3"></th>
     </tr>
   </thead>
