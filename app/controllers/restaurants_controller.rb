@@ -21,30 +21,20 @@ class RestaurantsController < ApplicationController
   def edit
   end
 
+  # Increments upvotes
   def upvote
     @restaurant = Restaurant.where(id: params[:id])
     @upvote = params[:upvote].to_i
-      if(@upvote == nil)
-        @upvote = 0
-      end
-
-      if params[:decision] == "true"
-        @restaurant.update(upvote: @upvote + 1)
-        redirect_to restaurants_url
-      end
+    Restaurant.vote_yes(@restaurant, @upvote)
+    redirect_to restaurants_url
   end
 
+  # Increments downvotes
   def downvote
     @restaurant = Restaurant.where(id: params[:id])
     @downvote = params[:downvote].to_i
-      if(@downvote == nil)
-        @downvote = 0
-      end
-
-      if params[:decision] == "true"
-        @restaurant.update(downvote: @downvote + 1)
-        redirect_to restaurants_url
-      end
+    Restaurant.vote_no(@restaurant, @downvote)
+    redirect_to restaurants_url
   end
 
   # POST /restaurants
