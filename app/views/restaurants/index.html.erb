@@ -1,12 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Restaurants</h1>
-
+<div class="topnav">
+<div class="search-container">
 <%= form_for "", url: restaurants_path, role: "search", method: :get do %>
-<%= text_field_tag :search_name, @search_term_name,placeholder: "Restaurant ... " %> <br>
-<%= text_field_tag :search_address, @search_term_address,placeholder: "Address ... " %><br>
+<%= text_field_tag :search_name, @search_term_name,placeholder: "Restaurant ... " %> 
+<%= text_field_tag :search_address, @search_term_address,placeholder: "Address ... " %>
 <%= submit_tag "Search" %>
-<% end %> <br>
+</div>
+<% end %> 
+</div>
 
 
 <table>
