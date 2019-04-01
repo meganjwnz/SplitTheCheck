@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class RestaurantsTest < ApplicationSystemTestCase
   setup do
-    @restaurant = restaurants(:one)
+    @restaurant = restaurants(:ruby)
   end
 
   test "visiting the index" do
@@ -12,12 +12,10 @@ class RestaurantsTest < ApplicationSystemTestCase
 
   test "creating a Restaurant" do
     visit restaurants_url
-    click_on "New Restaurant"
+    click_on "Add Restaurant"
 
-    fill_in "Address", with: @restaurant.address
-    fill_in "Downvote", with: @restaurant.downvote
-    fill_in "Name", with: @restaurant.name
-    fill_in "Upvote", with: @restaurant.upvote
+    fill_in "Address", with: "123 System Test"
+    fill_in "Name", with: "456 Tasty Test"
     click_on "Create Restaurant"
 
     assert_text "Restaurant was successfully created"
@@ -29,21 +27,39 @@ class RestaurantsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Address", with: @restaurant.address
-    fill_in "Downvote", with: @restaurant.downvote
     fill_in "Name", with: @restaurant.name
-    fill_in "Upvote", with: @restaurant.upvote
     click_on "Update Restaurant"
 
     assert_text "Restaurant was successfully updated"
     click_on "Back"
   end
 
-  test "destroying a Restaurant" do
+  test "upvoting a Restaurant" do
     visit restaurants_url
-    page.accept_confirm do
-      click_on "Destroy", match: :first
-    end
-
-    assert_text "Restaurant was successfully destroyed"
+    assert_selector('span.upvote', text: '0')
+    click_on "Splits check", match: :first
+    assert_selector('span.upvote', text: '1')
+    click_on "Splits check", match: :first
+    assert_selector('span.upvote', text: '2')
   end
+
+  test "downvoting a Restaurant" do
+    visit restaurants_url
+    assert_selector('span.downvote', text: '0')
+    click_on "Does NOT split check", match: :first
+    assert_selector('span.downvote', text: '1')
+    click_on "Does NOT split check", match: :first
+    assert_selector('span.downvote', text: '2')
+  end
+
+  test "search for a Restaurant" do
+    visit restaurants_url
+    assert_selector('span', count: 6)
+    fill_in "search_name", with: @restaurant.name
+    fill_in "search_address", with: @restaurant.address
+    click_on "Search"
+    assert_selector('span', count: 2)
+    assert_text @restaurant.name
+  end
+
 end

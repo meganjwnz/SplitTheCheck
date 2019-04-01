@@ -115,7 +115,8 @@ footer{
 }
 
 .split {
-  font-size: 20px;
+  font-size: 25px;
+  line-height: 30px;
 }
 
 @media screen and (max-width: 600px) {
