@@ -3,7 +3,7 @@ require 'test_helper'
 class RestaurantTest < ActiveSupport::TestCase
   fixtures :restaurants
 
-  test "restaurant is not valid without a uniquie name/address" do
+  test "restaurant is not valid without a unique name/address" do
 	  restaurant = Restaurant.new(name: restaurants(:ruby).name,
 				address: restaurants(:ruby).address,
 				upvote: 0,

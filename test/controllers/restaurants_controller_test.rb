@@ -27,4 +27,17 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should set upvote defaults" do
+    get restaurants_url
+    assert_equal nil, assigns(:upvote)
+    post restaurants_upvote_url
+    assert_equal 0, assigns(:upvote)
+  end
+
+  test "should set downvote defaults" do
+    get restaurants_url
+    assert_equal nil, assigns(:downvote)
+    post restaurants_downvote_url
+    assert_equal 0, assigns(:downvote)
+  end
 end
