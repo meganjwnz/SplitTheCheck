@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SplitTheCheck</title>
+    <title>Split The Check</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand" rel="stylesheet"> 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+<div class = wrapper>
+<header>
+    <h1>Restaurants</h1>
+    <h2>...will they split the check?</h2>
+ </header>
   <body>
     <%= yield %>
   </body>
+<footer>
+ <a href="mailto:mjones29@my.westga.edu">
+  mjones29@my.westga.edu</a>
+</footer>
+</div>
 </html>
