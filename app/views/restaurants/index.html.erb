@@ -38,14 +38,14 @@
             <span class="downvote"> <%= restaurant.downvote %> </span> 
         </td>
         
-         <td><%= button_to 'Splits check? ',  {:controller => 'restaurants',
+         <td><%= button_to 'Splits check ',  {:controller => 'restaurants',
                                    :action => "upvote",
                                    :id => restaurant.id,
 				   :upvote => restaurant.upvote,
                                    :decision => "true"}, method: 'post'%>
          </td>
         
-	 <td><%= button_to 'Does NOT split check?',{:controller => 'restaurants',
+	 <td><%= button_to 'Does NOT split check',{:controller => 'restaurants',
                                    :action => "downvote",
                                    :id => restaurant.id,
 				   :downvote => restaurant.downvote,

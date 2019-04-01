@@ -114,6 +114,10 @@ footer{
   padding: 3px;
 }
 
+.split {
+  font-size: 20px;
+}
+
 @media screen and (max-width: 600px) {
   .topnav .search-container {
     float: none;

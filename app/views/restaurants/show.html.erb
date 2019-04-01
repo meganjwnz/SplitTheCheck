@@ -1,24 +1,38 @@
 <p id="notice"><%= notice %></p>
 
+<div class ="split">
+<% if (@restaurant.upvote > @restaurant.downvote ) %>
+  Patrons found that <strong><%= @restaurant.name %></strong> will split the check more often than not <b>:)</b>
+<% elsif (@restaurant.upvote == @restaurant.downvote ) %>
+  Patrons found that <strong><%= @restaurant.name %></strong> may or may not split the check <b>¯\_(ツ)_/¯</b>
+<% else %>
+  Patrons found that <strong><%= @restaurant.name %></strong> will <strong>NOT</strong> split the check most of the time! <b>:(</b>
+<% end %>
+</div>
+
+<br><Br>
 <p>
-  <strong>Name:</strong>
+  <strong>Restaurant Name:</strong>
   <%= @restaurant.name %>
 </p>
 
 <p>
-  <strong>Address:</strong>
+  <strong>Restaurant Address:</strong>
   <%= @restaurant.address %>
 </p>
 
 <p>
-  <strong>Upvote:</strong>
+  <strong>Split Check Vote(s):  </strong> 
   <%= @restaurant.upvote %>
 </p>
 
 <p>
-  <strong>Downvote:</strong>
+  <strong>Does Not Split Check Vote(s):  </strong>
   <%= @restaurant.downvote %>
 </p>
 
+
+<br><br>
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>
+<Br><br>
