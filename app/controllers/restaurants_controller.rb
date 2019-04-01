@@ -26,7 +26,7 @@ class RestaurantsController < ApplicationController
   def edit
   end
 
-  # Increments upvotes
+  # Increments upvotes 
   def upvote
     @restaurant = Restaurant.where(id: params[:id])
     @upvote = params[:upvote].to_i
