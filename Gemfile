@@ -65,3 +65,5 @@ gem 'rails-controller-testing'
 
 gem 'bootstrap', '~> 4.3.1'
 
+gem 'devise', '~> 4.6', '>= 4.6.2'
+
