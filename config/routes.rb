@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :restaurants, except: [:destroy]
   post 'restaurants/upvote', to: 'restaurants#upvote'
   post 'restaurants/downvote', to: 'restaurants#downvote'
