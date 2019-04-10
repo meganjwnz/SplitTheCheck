@@ -1,7 +1,9 @@
 class Restaurant < ApplicationRecord
 validates :name, :address, presence: true, uniqueness: true
-
 before_save :default_values
+has_many :votes
+has_many :voters, through: :votes
+
 
   #Adds default value to upvote and downvote
   def default_values
