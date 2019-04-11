@@ -1,14 +1,19 @@
 class Restaurant < ApplicationRecord
-validates :name, :address, presence: true, uniqueness: true
-before_save :default_values
-has_many :votes
-has_many :voters, through: :votes
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes
 
+  validates :name, :address, presence: true, uniqueness: true
+  before_save :default_values
+
+  def self.votes_in_favor
+    votes.count
+  end
 
   #Adds default value to upvote and downvote
   def default_values
     self.upvote = 0 if self.upvote.nil?
     self.downvote= 0 if self.downvote.nil?
+    votes.count = 0 if votes.nil?
   end
 
   # Increments upvotes

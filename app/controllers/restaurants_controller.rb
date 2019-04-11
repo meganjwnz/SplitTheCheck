@@ -30,7 +30,7 @@ class RestaurantsController < ApplicationController
   # Increments upvotes 
   def upvote
     @restaurant = Restaurant.where(id: params[:id])
-    @upvote = params[:upvote].to_i
+    @upvote = @restaurant.votes_in_favor
     Restaurant.vote_yes(@restaurant, @upvote)
     redirect_to restaurants_url
   end
@@ -40,6 +40,7 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.where(id: params[:id])
     @downvote = params[:downvote].to_i
     Restaurant.vote_no(@restaurant, @downvote)
+    
     redirect_to restaurants_url
   end
 
@@ -47,7 +48,7 @@ class RestaurantsController < ApplicationController
   # POST /restaurants.json
   def create
     @restaurant = Restaurant.new(restaurant_params)
-
+    @vote = Vote.new(vote_params)
     respond_to do |format|
       if @restaurant.save
         format.html { redirect_to @restaurant, notice: 'Restaurant was successfully created.' }
@@ -73,21 +74,10 @@ class RestaurantsController < ApplicationController
     end
   end
 
-  
-  # DELETE /restaurants/1
-  # DELETE /restaurants/1.json
-  #def destroy
-   # @restaurant.destroy
-   # respond_to do |format|
-     # format.html { redirect_to restaurants_url, notice: 'Restaurant was successfully destroyed.' }
-    #  format.json { head :no_content }
-    #end
- # end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant
-      @restaurant = Restaurant.find(params[:id])
+      @restaurant = Restaurant.find(params[:id]) 
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-
 <div class="topnav">
   <div class = "add">
     <%= link_to 'Add Restaurant', new_restaurant_path %>
@@ -32,7 +31,7 @@
             <%= image_tag("thumps_up.png", :alt => "Does Split") %> 
             <span class="upvote"><%= restaurant.upvote %> </span> 
         </td>
-       
+
 	<td>
             <%= image_tag("thumbs_down.png", :alt => "Does Not Split") %>
             <span class="downvote"> <%= restaurant.downvote %> </span> 
@@ -40,12 +39,16 @@
         
          <td><%= button_to 'Splits check ',  {:controller => 'restaurants',
                                    :action => "upvote",
+				   :user => current_user,
                                    :id => restaurant.id,
 				   :upvote => restaurant.upvote}, method: 'post'%>
          </td>
+
+	
         
 	 <td><%= button_to 'Does NOT split check',{:controller => 'restaurants',
                                    :action => "downvote",
+				   :user => current_user,
                                    :id => restaurant.id,
 				   :downvote => restaurant.downvote}, method: 'post'%> 
          </td>
@@ -54,5 +57,4 @@
      </tbody>
     <% end %>
 </table>
-
 <br>
