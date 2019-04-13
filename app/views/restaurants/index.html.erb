@@ -12,7 +12,6 @@
 <% end %> 
 </div>
 <br><br>
-
 <table class="table table-striped">
     <% @restaurants.each do |restaurant| %>
     <tbody>
@@ -36,8 +35,7 @@
             <%= image_tag("thumbs_down.png", :alt => "Does Not Split") %>
             <span class="downvote"> <%= restaurant.downvote_score %> </span> 
         </td>
-        
-         <td><%= button_to 'Splits check ',  {:controller => 'votes',
+        <td><%= button_to 'Splits check ',  {:controller => 'votes',
                                    :action => "upvote_restaurant",
 				   :user => current_user,
                                    :restaurant => restaurant,
@@ -47,7 +45,8 @@
 	 <td><%= button_to 'Does NOT split check',{:controller => 'votes',
                                    :action => "downvote_restaurant",
 				   :user => current_user,
-                                   :restaurant => restaurant}, method: 'post'%> 
+                                   :restaurant => restaurant,
+				   :vote => "false"}, method: 'post'%> 
          </td>
       </tr>
       <tr><td><br></td></tr>

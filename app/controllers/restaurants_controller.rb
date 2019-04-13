@@ -36,20 +36,6 @@ class RestaurantsController < ApplicationController
     redirect_to restaurants_url
   end
 
-  def upvote_totals
-     @restaurant = Restaurant.where(id: params[:id])
-     @upvotes = Restaurant.upvote_total(@restaurant)
-  end
-
-  # Increments downvotes
-  def downvote
-    @restaurant = Restaurant.where(id: params[:id])
-    @downvote = params[:downvote].to_i
-    Restaurant.vote_no(@restaurant, @downvote)
-    
-    redirect_to restaurants_url
-  end
-
   # POST /restaurants
   # POST /restaurants.json
   def create
