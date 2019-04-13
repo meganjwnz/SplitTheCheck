@@ -1,5 +1,7 @@
 # app/controllers/votes_controller.rb
 class VotesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
 
   # GET /restaurants
   # GET /restaurants.json

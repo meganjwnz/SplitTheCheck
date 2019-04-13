@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class RestaurantsControllerTest < ActionDispatch::IntegrationTest
-  fixtures :restaurants
+  include Devise::Test::IntegrationHelpers
+  fixtures :restaurants, :users
 
   setup do
     @restaurant = restaurants(:one)
@@ -13,6 +14,7 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
+    sign_in users(:example)
     get new_restaurant_url
     assert_response :success
   end
@@ -23,21 +25,9 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit" do
+    sign_in users(:example)
     get edit_restaurant_url(@restaurant)
     assert_response :success
   end
 
-  test "should set upvote defaults" do
-    get restaurants_url
-    assert_equal nil, assigns(:upvote)
-    post restaurants_upvote_url
-    assert_equal 0, assigns(:upvote)
-  end
-
-  test "should set downvote defaults" do
-    get restaurants_url
-    assert_equal nil, assigns(:downvote)
-    post restaurants_downvote_url
-    assert_equal 0, assigns(:downvote)
-  end
 end
