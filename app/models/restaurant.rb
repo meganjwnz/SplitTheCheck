@@ -1,17 +1,15 @@
 class Restaurant < ApplicationRecord
-  has_many :votes, dependent: :destroy
-  has_many :users, through: :votes
+  has_many :votes
+  has_many :users
 
   validates :name, :address, presence: true, uniqueness: true
 
-  # Increments upvotes
-  # param: restaurant = current restaurant
-  # param: upvote = current number of upvotes
-  def self.vote_yes(restaurant, upvote)
-	if(upvote == nil)
-          upvote = 0
-	end
-	#restaurant.update(upvote: upvote + 1)
+  def upvote_score
+    votes.where(vote: "true").count
+  end
+
+  def downvote_score
+    votes.where(vote: "false").count
   end
 
   # Increments downvotes

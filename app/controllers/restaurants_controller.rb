@@ -6,6 +6,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
+    
     if params[:search_name] && params[:search_address]
       @search_name = params[:search_name]
       @search_address = params[:search_address]
@@ -29,10 +30,15 @@ class RestaurantsController < ApplicationController
 
   # Increments upvotes 
   def upvote
+    @upvote = 0
     @restaurant = Restaurant.where(id: params[:id])
-    @upvote = @restaurant.votes_in_favor
-    Restaurant.vote_yes(@restaurant, @upvote)
+    @upvote = @restaurants.score
     redirect_to restaurants_url
+  end
+
+  def upvote_totals
+     @restaurant = Restaurant.where(id: params[:id])
+     @upvotes = Restaurant.upvote_total(@restaurant)
   end
 
   # Increments downvotes

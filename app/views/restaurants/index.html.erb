@@ -29,26 +29,25 @@
        
 	<td>
             <%= image_tag("thumps_up.png", :alt => "Does Split") %> 
-            <span class="upvote"><%=  %> </span> 
+            <span class="upvote"><%= restaurant.upvote_score %> </span> 
         </td>
 
 	<td>
             <%= image_tag("thumbs_down.png", :alt => "Does Not Split") %>
-            <span class="downvote"> <%=  %> </span> 
+            <span class="downvote"> <%= restaurant.downvote_score %> </span> 
         </td>
         
-         <td><%= button_to 'Splits check ',  {:controller => 'restaurants',
-                                   :action => "upvote",
+         <td><%= button_to 'Splits check ',  {:controller => 'votes',
+                                   :action => "upvote_restaurant",
 				   :user => current_user,
-                                   :id => restaurant.id}, method: 'post'%>
+                                   :restaurant => restaurant,
+				   :vote => "true"}, method: 'post'%>
          </td>
-
-	
         
-	 <td><%= button_to 'Does NOT split check',{:controller => 'restaurants',
-                                   :action => "downvote",
+	 <td><%= button_to 'Does NOT split check',{:controller => 'votes',
+                                   :action => "downvote_restaurant",
 				   :user => current_user,
-                                   :id => restaurant.id}, method: 'post'%> 
+                                   :restaurant => restaurant}, method: 'post'%> 
          </td>
       </tr>
       <tr><td><br></td></tr>
