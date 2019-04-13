@@ -1,20 +1,8 @@
 class Restaurant < ApplicationRecord
   has_many :votes, dependent: :destroy
-  has_many :voters, through: :votes
+  has_many :users, through: :votes
 
   validates :name, :address, presence: true, uniqueness: true
-  before_save :default_values
-
-  def self.votes_in_favor
-    votes.count
-  end
-
-  #Adds default value to upvote and downvote
-  def default_values
-    self.upvote = 0 if self.upvote.nil?
-    self.downvote= 0 if self.downvote.nil?
-    votes.count = 0 if votes.nil?
-  end
 
   # Increments upvotes
   # param: restaurant = current restaurant
@@ -23,7 +11,7 @@ class Restaurant < ApplicationRecord
 	if(upvote == nil)
           upvote = 0
 	end
-	restaurant.update(upvote: upvote + 1)
+	#restaurant.update(upvote: upvote + 1)
   end
 
   # Increments downvotes
@@ -33,7 +21,7 @@ class Restaurant < ApplicationRecord
 	if(downvote == nil)
           downvote = 0
 	end
-	restaurant.update(downvote: downvote + 1)
+	#restaurant.update(downvote: downvote + 1)
       end
 
   #Searches for restaurants in DB with that name and/or address
