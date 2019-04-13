@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <div class ="split">
-<% if (@restaurant.upvote > @restaurant.downvote ) %>
+<% if (@restaurant.upvote_score > @restaurant.downvote_score ) %>
   Patrons found that <strong><%= @restaurant.name %></strong> will split the check more often than not <b>:)</b>
-<% elsif (@restaurant.upvote == @restaurant.downvote ) %>
+<% elsif (@restaurant.upvote_score == @restaurant.downvote_score) %>
   Patrons found that <strong><%= @restaurant.name %></strong> may or may not split the check <b>¯\_(ツ)_/¯</b>
 <% else %>
   Patrons found that <strong><%= @restaurant.name %></strong> will <strong>NOT</strong> split the check most of the time! <b>:(</b>
@@ -23,12 +23,12 @@
 
 <p>
   <strong>Split Check Vote(s):  </strong> 
-  <%= @restaurant.upvote %>
+  <%= @restaurant.upvote_score %>
 </p>
 
 <p>
   <strong>Does Not Split Check Vote(s):  </strong>
-  <%= @restaurant.downvote %>
+  <%= @restaurant.downvote_score %>
 </p>
 
 
