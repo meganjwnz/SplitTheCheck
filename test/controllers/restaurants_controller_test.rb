@@ -19,6 +19,11 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should not get new" do
+    get new_restaurant_url
+    assert_equal "/unauthenticated", path
+  end
+
   test "should show restaurant" do
     get restaurant_url(@restaurant)
     assert_response :success
@@ -28,6 +33,11 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:example)
     get edit_restaurant_url(@restaurant)
     assert_response :success
+  end
+
+  test "should not edit restaurant" do
+    get edit_restaurant_url(@restaurant)
+    assert_equal "/unauthenticated", path
   end
 
 end
