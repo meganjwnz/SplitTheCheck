@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 <div class="topnav">
   <div class = "add">
+    <% if user_signed_in? %>
     <%= link_to 'Add Restaurant', new_restaurant_path %>
+    <% end %>
   </div>
   <div class="search-container">
     <%= form_for "", url: restaurants_path, role: "search", method: :get do %>
@@ -22,32 +24,40 @@
         </td>
        
         <td>
-	    <%= link_to 'Show', restaurant %> |
-            <%= link_to 'Edit', edit_restaurant_path(restaurant) %>
+	    <%= link_to 'Show', restaurant %> 
+	    <% if user_signed_in? %>|
+              <%= link_to 'Edit', edit_restaurant_path(restaurant) %>
+            <% end %>
         </td>
        
 	<td>
             <%= image_tag("thumps_up.png", :alt => "Does Split") %> 
-            <span class="upvote"> <%= restaurant.upvote_score %> </span> 
+	    <span class="upvote"> <%= restaurant.upvote_score %> </span> 
         </td>
 
 	<td>
             <%= image_tag("thumbs_down.png", :alt => "Does Not Split") %>
             <span class="downvote"> <%= restaurant.downvote_score %> </span> 
         </td>
-        <td><%= button_to 'Splits check ',  {:controller => 'votes',
+        <td>
+            <% if user_signed_in? %>
+	    <%= button_to 'Splits check ',  {:controller => 'votes',
                                    :action => "upvote_restaurant",
 				   :user => current_user,
                                    :restaurant => restaurant,
 				   :vote => "true"}, method: 'post'%>
-         </td>
+	    <% end %>         
+	</td>
         
-	 <td><%= button_to 'Does NOT split check',{:controller => 'votes',
+	<td>
+	    <% if user_signed_in? %>
+	    <%= button_to 'Does NOT split check',{:controller => 'votes',
                                    :action => "downvote_restaurant",
 				   :user => current_user,
                                    :restaurant => restaurant,
 				   :vote => "false"}, method: 'post'%> 
-         </td>
+	    <% end %>        
+	</td>
       </tr>
       <tr><td><br></td></tr>
      </tbody>

@@ -24,12 +24,6 @@ class RestaurantsTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
-  test "creating a Restaurant when not signed in" do
-    visit restaurants_url
-    click_on "Add Restaurant"
-    assert_text "You need to sign in or sign up before continuing."
-  end
-
   test "updating a Restaurant" do
     sign_in users(:example)
     visit restaurants_url
@@ -41,13 +35,6 @@ class RestaurantsTest < ApplicationSystemTestCase
 
     assert_text "Restaurant was successfully updated"
     click_on "Back"
-  end
-
-
-  test "updating a Restaurant when not signed in" do
-    visit restaurants_url
-    click_on "Edit", match: :first
-    assert_text "You need to sign in or sign up before continuing."
   end
 
   test "upvoting a Restaurant" do
@@ -78,20 +65,6 @@ class RestaurantsTest < ApplicationSystemTestCase
     sign_in users(:example2)
     click_on "Does NOT split check", match: :first
     assert_selector('span.downvote', text: '2')
-  end
-
-  test "downvote a Restaurant when not signed in" do
-    visit restaurants_url
-    assert_selector('span.downvote', text: '0')
-    click_on "Does NOT split check", match: :first
-    assert_text "You need to sign in or sign up before continuing."
-  end
-
-  test "upvote a Restaurant when not signed in" do
-    visit restaurants_url
-    assert_selector('span.downvote', text: '0')
-    click_on "Splits check", match: :first
-    assert_text "You need to sign in or sign up before continuing."
   end
 
   test "search for a Restaurant" do
