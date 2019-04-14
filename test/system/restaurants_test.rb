@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
 class RestaurantsTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
   setup do
     @restaurant = restaurants(:ruby)
   end
@@ -11,6 +12,7 @@ class RestaurantsTest < ApplicationSystemTestCase
   end
 
   test "creating a Restaurant" do
+    sign_in users(:example)
     visit restaurants_url
     click_on "Add Restaurant"
 
@@ -22,7 +24,14 @@ class RestaurantsTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
+  test "creating a Restaurant when not signed in" do
+    visit restaurants_url
+    click_on "Add Restaurant"
+    assert_text "You need to sign in or sign up before continuing."
+  end
+
   test "updating a Restaurant" do
+    sign_in users(:example)
     visit restaurants_url
     click_on "Edit", match: :first
 
@@ -34,22 +43,55 @@ class RestaurantsTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
+
+  test "updating a Restaurant when not signed in" do
+    visit restaurants_url
+    click_on "Edit", match: :first
+    assert_text "You need to sign in or sign up before continuing."
+  end
+
   test "upvoting a Restaurant" do
+    sign_in users(:example)
     visit restaurants_url
     assert_selector('span.upvote', text: '0')
     click_on "Splits check", match: :first
     assert_selector('span.upvote', text: '1')
     click_on "Splits check", match: :first
+    assert_selector('span.upvote', text: '1')
+    
+    sign_out users(:example)
+    sign_in users(:example2)
+    click_on "Splits check", match: :first
     assert_selector('span.upvote', text: '2')
   end
 
   test "downvoting a Restaurant" do
+    sign_in users(:example)
     visit restaurants_url
     assert_selector('span.downvote', text: '0')
     click_on "Does NOT split check", match: :first
     assert_selector('span.downvote', text: '1')
     click_on "Does NOT split check", match: :first
+    assert_selector('span.downvote', text: '1')
+    
+    sign_out users(:example)
+    sign_in users(:example2)
+    click_on "Does NOT split check", match: :first
     assert_selector('span.downvote', text: '2')
+  end
+
+  test "downvote a Restaurant when not signed in" do
+    visit restaurants_url
+    assert_selector('span.downvote', text: '0')
+    click_on "Does NOT split check", match: :first
+    assert_text "You need to sign in or sign up before continuing."
+  end
+
+  test "upvote a Restaurant when not signed in" do
+    visit restaurants_url
+    assert_selector('span.downvote', text: '0')
+    click_on "Splits check", match: :first
+    assert_text "You need to sign in or sign up before continuing."
   end
 
   test "search for a Restaurant" do
