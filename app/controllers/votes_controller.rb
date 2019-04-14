@@ -1,5 +1,6 @@
 # app/controllers/votes_controller.rb
 class VotesController < ApplicationController
+  before_action :set_vote, only: [:show, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
 
 
@@ -8,7 +9,6 @@ class VotesController < ApplicationController
   def index
     @votes = Vote.all
   end
-
 
   def create
     @vote = Vote.new(vote_params)
@@ -34,8 +34,16 @@ class VotesController < ApplicationController
     Vote.downvote_restaurant(current_user, Restaurant.find(params[:restaurant]), "false")
     redirect_to restaurants_url
   end
+  
+  def show
+  end
 
-  private
+  def edit
+  end
+
+  def new
+    @vote = Vote.new
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

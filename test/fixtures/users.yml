@@ -12,6 +12,6 @@ example2:
   email: example2.example.com
   encrypted_password: password2
 
-exampl3:
+example3:
   email: example3.example.com
   encrypted_password: password3

@@ -17,4 +17,19 @@ class RestaurantTest < ActiveSupport::TestCase
     assert_equal(@result.to_a, [@restaurant])
   end
 
+  test "should count upvotes for a restaurant" do
+    @restaurant = restaurants(:ruby)
+    Vote.upvote_restaurant(users(:example2), restaurants(:ruby), true)
+    Vote.upvote_restaurant(users(:example), restaurants(:ruby), true)
+    Vote.upvote_restaurant(users(:example3), restaurants(:ruby), false)
+    assert_equal(2, @restaurant.upvote_score)
+  end
+
+  test "should count downvotes for a restaurant" do
+    @restaurant = restaurants(:ruby)
+    Vote.upvote_restaurant(users(:example2), restaurants(:ruby), true)
+    Vote.upvote_restaurant(users(:example), restaurants(:ruby), true)
+    Vote.upvote_restaurant(users(:example3), restaurants(:ruby), false)
+    assert_equal(1, @restaurant.downvote_score)
+  end
 end

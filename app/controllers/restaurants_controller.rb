@@ -28,14 +28,6 @@ class RestaurantsController < ApplicationController
   def edit
   end
 
-  # Increments upvotes 
-  def upvote
-    @upvote = 0
-    @restaurant = Restaurant.where(id: params[:id])
-    @upvote = @restaurants.score
-    redirect_to restaurants_url
-  end
-
   # POST /restaurants
   # POST /restaurants.json
   def create
