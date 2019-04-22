@@ -2,12 +2,12 @@
 
 <p>
   <strong>Restaurant:</strong>
-  <%= @comment.restaurant %>
+  <%= @comment.restaurant.name %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @comment.user %>
+  <%= @comment.user.email %>
 </p>
 
 <p>
@@ -15,5 +15,4 @@
   <%= @comment.comment %>
 </p>
 
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
+<%= link_to 'Back', restaurants_path %>
