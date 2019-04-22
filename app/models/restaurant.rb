@@ -1,6 +1,7 @@
 class Restaurant < ApplicationRecord
   has_many :votes
   has_many :users
+  has_many :comments
 
   validates :name, :address, presence: true, uniqueness: true
 
