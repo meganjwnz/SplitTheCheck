@@ -31,6 +31,17 @@
   <%= @restaurant.downvote_score %>
 </p>
 
+<p>
+  <strong>Comments:  </strong>
+  <% @comment.each do |comment| %>
+    <% if @restaurant.id == comment.restaurant.id %>
+      <tr>
+        <td><%= comment.user.email %></td>
+        <td><%= comment.comment %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</p>
 
 <br><br>
 <% if user_signed_in? %>
