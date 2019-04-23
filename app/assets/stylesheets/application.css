@@ -124,6 +124,11 @@ footer{
   text-align: right;
 }
 
+.floatleft {
+  float: left;
+  text-align: left;
+}
+
 .pink {
   color: #b300b3;
 }
