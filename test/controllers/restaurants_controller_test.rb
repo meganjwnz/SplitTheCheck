@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
-  fixtures :restaurants, :users
+  fixtures :restaurants, :users, :votes, :favorites
 
   setup do
     @restaurant = restaurants(:one)
