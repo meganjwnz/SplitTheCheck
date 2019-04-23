@@ -36,25 +36,11 @@
   <% if !@restaurant.comments.any? %>
 	No comments have been made about this restaurant!
   <% else %>
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Comment</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-  <tbody>
   <% @comment.each do |comment| %>
     <% if @restaurant.id == comment.restaurant.id %>
-      <tr>
-        <td><%= comment.user.email %> - </td>
-        <td>" <%= comment.comment %> "</td>
-      </tr>
+      <br><div class = "indent"><span class = "pink"> * </span><b><%= comment.user.email %></b> said " <i><%= comment.comment %></i> "</div>
     <% end %>
   <% end %>
-  </tbody>
-</table>
   <% end %>
 </p>
 

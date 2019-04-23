@@ -79,7 +79,7 @@ tr {
 }
 
 .wrapper {
-  width: 90%;
+  width: 95%;
   margin: auto;
   padding-top: 15px;
 }
@@ -98,6 +98,19 @@ footer{
   color: #FFFFFF;
   text-align: center;
   font-size: 10px;
+}
+
+a {
+  color: #2accbb;
+}
+
+a:visited{
+  color: #156b62;
+}
+
+a:visited:hover{
+  color:#b300b3;
+  background-color: white;
 }
 
 .upvote {
@@ -131,6 +144,23 @@ footer{
 
 .pink {
   color: #b300b3;
+}
+
+.center {
+  text-align: center;
+  text-decoration: underline overline;
+  text-shadow: 0 0 3px #b300b3;
+}
+
+.indent {
+  text-indent: 50px;
+}
+
+#underline {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 3px;
 }
 
 @media screen and (max-width: 600px) {

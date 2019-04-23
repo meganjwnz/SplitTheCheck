@@ -1,15 +1,45 @@
-<% current_user.email %>
-<b>User comments:</b> <br>
+<h1><div class = "center"><%= current_user.email %>'s Profile</div></h1>
+<h3>Things I've said...</h3> <br>
+<% if !@comments.where(user_id: current_user.id).any? %>
+	<div class ="indent">I haven't made any comments! :(</div>
+<% else %>
   <% @comments.each do |comment| %>
     <% if(comment.user_id == current_user.id) %>
-	<%= comment.comment %><br>
+        <div class ="indent"><span class ="pink">* </span><%= link_to comment.restaurant.name, restaurant_url(comment.restaurant.id) %> - 
+	" <%= comment.comment %> "<br><br></div>
     <% end %>
   <% end %>
-<b>User favorites:</b><br>
+<% end %>
+<br>
+<br>
+
+<h3>Votes I've made...</h3> <br>
+<% if !@votes.where(user_id: current_user.id).any? %>
+	<div class ="indent">I haven't made any votes! :( </div<
+<% else %>
+  <% @votes.each do |vote| %>
+    <% if(vote.user_id == current_user.id) %>
+      <% if(vote.vote == true) %>
+        <div class ="indent"><span class ="pink">* </span><%= link_to vote.restaurant.name, restaurant_url(vote.restaurant.id) %> <span id = "underline">splits</span> checks<br><br></div>
+      <% end %>
+      <% if(vote.vote == false) %>
+        <div class ="indent"><span class ="pink">* </span><%= link_to vote.restaurant.name, restaurant_url(vote.restaurant.id) %> <span id = "underline">does not</span> split checks</br><br></div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+<br>
+
+
+<h3>My favorites!</h3><br>
+<% if !@favorites.where(user_id: current_user.id).any? %>
+	<div class ="indent">I haven't selected any favorites! :(</div> 
+<% else %>
   <% @favorites.each do |favorite| %>
      <% if(favorite.user_id == current_user.id) %>
-	<%= favorite.restaurant.name %><br>
+	<div class ="indent"><span class ="pink">* </span><%= link_to favorite.restaurant.name, restaurant_url(favorite.restaurant.id) %></div><br>
      <% end %>
   <% end %>
-
+<% end %>
+<br><br>
 <%= link_to 'Back', restaurants_path %>

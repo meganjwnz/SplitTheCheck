@@ -10,5 +10,6 @@ class UsersController < ApplicationController
     def set_user
       @comments = Comment.all
       @favorites = Favorite.all
+      @votes = Vote.all
     end
 end

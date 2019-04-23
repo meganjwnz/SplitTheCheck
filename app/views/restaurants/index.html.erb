@@ -69,11 +69,11 @@
                                    :action => "favorite_restaurant",
 				   :user => current_user,
                                    :restaurant => restaurant}, method: 'post'%>
-                	<%= image_tag("star_open.png", :alt => "Not a favorite") %>  
+                	<td><%= image_tag("star_open.png", :alt => "Not a favorite") %> </td> 
  		<% end %>
                 <% if restaurant.favorites_status(current_user.id) == true %>
 			One of your favorites!
-			<%= image_tag("favorite_star.png", :alt => "Favorite") %>   
+			<td><%= image_tag("favorite_star.png", :alt => "Favorite") %></td>
  		<% end %>
 	   </td>
           <% end %>
