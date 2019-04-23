@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   post 'votes/downvote_restaurant', to: 'votes#downvote_restaurant'
   root to: 'restaurants#index'
 
+  resources :favorites
+  post 'favorites/favorite_restaurant', to: 'favorites#favorite_restaurant'
+  root to: 'restaurants#index'
 end

@@ -2,7 +2,7 @@ class Restaurant < ApplicationRecord
   has_many :votes
   has_many :users
   has_many :comments
-
+  has_many :favorites
   validates :name, :address, presence: true, uniqueness: true
 
   def upvote_score
@@ -13,15 +13,14 @@ class Restaurant < ApplicationRecord
     votes.where(vote: "false").count
   end
 
-  # Increments downvotes
-  # param: restaurant = current restaurant
-  # param: downvotes = current number of downvotes
-  def self.vote_no(restaurant, downvote)
-	if(downvote == nil)
-          downvote = 0
-	end
-	#restaurant.update(downvote: downvote + 1)
-      end
+  def favorites_status
+    favs = favorites.where(favorite: "true").count
+    if (favs == 1)
+      return true;
+    else
+      return false;
+    end
+  end
 
   #Searches for restaurants in DB with that name and/or address
   def self.search_by(search_name, search_address)
