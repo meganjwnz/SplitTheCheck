@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/show'
   resources :comments
   devise_for :users
   resources :restaurants, except: [:destroy] do
@@ -11,5 +12,6 @@ Rails.application.routes.draw do
 
   resources :favorites
   post 'favorites/favorite_restaurant', to: 'favorites#favorite_restaurant'
+  post 'favorites/unfavorite_restaurant', to: 'favorites#unfavorite_restaurant'
   root to: 'restaurants#index'
 end

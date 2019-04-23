@@ -1,0 +1,15 @@
+<% current_user.email %>
+<b>User comments:</b> <br>
+  <% @comments.each do |comment| %>
+    <% if(comment.user_id == current_user.id) %>
+	<%= comment.comment %><br>
+    <% end %>
+  <% end %>
+<b>User favorites:</b><br>
+  <% @favorites.each do |favorite| %>
+     <% if(favorite.user_id == current_user.id) %>
+	<%= favorite.restaurant.name %><br>
+     <% end %>
+  <% end %>
+
+<%= link_to 'Back', restaurants_path %>

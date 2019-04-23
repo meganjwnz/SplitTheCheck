@@ -15,16 +15,18 @@
     <h2>...will they split the check?</h2>
  </header>
   <body>
+   <p class="notice"><%= notice %></p>
+   <p class="alert"><%= alert %></p>
    <div class = floatright >
     <% if user_signed_in? %>
       <div class = pink><%= current_user.email %></div><br>
+      <%= link_to "View Profile",  users_show_url %> <br><br>
       <%= link_to "Logout",  destroy_user_session_path, :method=> :delete %>
     <% else %>
        <%= link_to "Login", new_user_session_path %> | <%= link_to "Sign Up", new_user_registration_path %>
     <% end %>
     </div>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+<br>
     <%= yield %>
   </body>
 <footer>

@@ -64,16 +64,16 @@
           <% end %> 
           <% if user_signed_in? %>
 	    <td>
-         	<%= button_to 'Favorite?',{:controller => 'favorites',
+                <% if restaurant.favorites_status(current_user.id) == false %>
+         		<%= button_to 'Favorite?',{:controller => 'favorites',
                                    :action => "favorite_restaurant",
 				   :user => current_user,
-                                   :restaurant => restaurant,
-				   :favorite => "true"}, method: 'post'%>
-                <% if restaurant.favorites_status == true %>
-		<%= image_tag("favorite_star.png", :alt => "Favorite") %>   
+                                   :restaurant => restaurant}, method: 'post'%>
+                	<%= image_tag("star_open.png", :alt => "Not a favorite") %>  
  		<% end %>
-		<% if restaurant.favorites_status == false %>
-                <%= image_tag("star_open.png", :alt => "Not a favorite") %>  
+                <% if restaurant.favorites_status(current_user.id) == true %>
+			One of your favorites!
+			<%= image_tag("favorite_star.png", :alt => "Favorite") %>   
  		<% end %>
 	   </td>
           <% end %>

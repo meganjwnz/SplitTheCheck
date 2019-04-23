@@ -13,8 +13,8 @@ class Restaurant < ApplicationRecord
     votes.where(vote: "false").count
   end
 
-  def favorites_status
-    favs = favorites.where(favorite: "true").count
+  def favorites_status(user_id)
+    favs = favorites.where(favorite: "true", user: user_id).count
     if (favs == 1)
       return true;
     else

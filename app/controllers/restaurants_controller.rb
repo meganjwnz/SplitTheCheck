@@ -6,7 +6,6 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
-    @comments = Comment.all
     if params[:search_name] && params[:search_address]
       @search_name = params[:search_name]
       @search_address = params[:search_address]
@@ -62,6 +61,7 @@ class RestaurantsController < ApplicationController
     def set_restaurant
       @restaurant = Restaurant.find(params[:id]) 
       @comment = Comment.all
+      @favorites = Favorite.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
