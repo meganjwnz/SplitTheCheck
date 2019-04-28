@@ -9,5 +9,4 @@ class FavoriteTest < ActiveSupport::TestCase
      @favorite = Favorite.favorite_restaurant(users(:example), restaurants(:one), true)
      assert_equal(true, @favorite.favorite)
   end
-
 end
