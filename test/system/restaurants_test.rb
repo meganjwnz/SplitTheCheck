@@ -4,6 +4,7 @@ class RestaurantsTest < ApplicationSystemTestCase
   include Devise::Test::IntegrationHelpers
   setup do
     @restaurant = restaurants(:ruby)
+    @comment = comments(:one)
   end
 
   test "visiting the index" do
@@ -68,6 +69,7 @@ class RestaurantsTest < ApplicationSystemTestCase
   end
 
   test "search for a Restaurant" do
+    sign_in users(:example)
     visit restaurants_url
     assert_selector('span', count: 6)
     fill_in "search_name", with: @restaurant.name
@@ -77,4 +79,20 @@ class RestaurantsTest < ApplicationSystemTestCase
     assert_text @restaurant.name
   end
 
+  #tests commenting on a restaurant
+  test "comment on a restaurant" do
+    sign_in users(:example)
+    visit restaurants_url
+    click_on "Add Comment", match: :first
+    fill_in "Comment", with: @comment.comment
+    click_on "Create Comment"
+  end
+
+  #tests adding favorite
+  test "favorite a restaurant" do
+    sign_in users(:example)
+    visit restaurants_url
+    click_on "Favorite?", match: :first
+    assert_text "One of your favorites!"
+  end
 end
