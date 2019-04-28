@@ -95,4 +95,46 @@ class RestaurantsTest < ApplicationSystemTestCase
     click_on "Favorite?", match: :first
     assert_text "One of your favorites!"
   end
+
+  test "view profile without any comments/votes/favorites" do
+    sign_in users(:example)
+    visit restaurants_url
+    click_on "View Profile"
+    assert_text "example@example.com"
+    assert_text "I haven't made any comments! :("
+    assert_text "I haven't made any votes! :("
+    assert_text "I haven't selected any favorites! :("
+  end
+
+  test "view profile with comments/votes/favorites" do
+    sign_in users(:example)
+    visit restaurants_url
+
+    click_on "Add Comment", match: :first
+    fill_in "Comment", with: @comment.comment
+    click_on "Create Comment"
+    click_on "Back"
+
+    click_on "Favorite?", match: :first
+
+    click_on "Splits check", match: :first
+
+    click_on "View Profile"
+    assert_text "example@example.com"
+    assert_text "MyStringz"
+    assert_text "* Fancy Restaurant splits checks"
+    assert_text "* Fancy Restaurant"
+  end
+
+  test "follow restaurant link in profile" do
+    sign_in users(:example)
+    visit restaurants_url
+
+    click_on "Favorite?", match: :first
+
+    click_on "View Profile"
+    click_on "Fancy Restaurant"
+    assert_text "Restaurant Name: Fancy Restaurant"
+    assert_text "Restaurant Address: 123 Expensive Address"
+  end
 end

@@ -5,13 +5,13 @@
 # below each fixture, per the syntax in the comments below
 #
 example: 
-  email: example.example.com
+  email: example@example.com
   encrypted_password: password
 
 example2:
-  email: example2.example.com
+  email: example2@example.com
   encrypted_password: password2
 
 example3:
-  email: example3.example.com
+  email: example3@example.com
   encrypted_password: password3
